@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd \"C:\\\\Users\\\\azkre\\\\Documents\\\\Y4 S2\\\\6.8300\\\\pset3_student\\\\pset3-2026\\\\student_pset3\" && python3 << 'EOF'\nimport json\nimport re\n\n# Read the notebook file\nwith open\\('1_sfm_pipeline.ipynb', 'r'\\) as f:\n    nb = json.load\\(f\\)\n\n# Find all cells related to Part 4 or question 4b\nrelevant_cells = []\nfor i, cell in enumerate\\(nb['cells']\\):\n    cell_id = cell.get\\('id', f'cell-{i}'\\)\n    cell_type = cell.get\\('cell_type', ''\\)\n    \n    # Get cell content\n    if cell_type == 'markdown':\n        content = ''.join\\(cell.get\\('source', []\\)\\)\n    elif cell_type == 'code':\n        content = ''.join\\(cell.get\\('source', []\\)\\)\n    else:\n        content = ''\n    \n    # Check if cell is related to Part 4 or 4b\n    if re.search\\(r'\\(Part\\\\s*4|question\\\\s*4b|4b|4\\\\\\(b\\\\\\)\\)', content, re.IGNORECASE\\):\n        relevant_cells.append\\({\n            'index': i,\n            'cell_id': cell_id,\n            'cell_type': cell_type,\n            'content': content,\n            'outputs': cell.get\\('outputs', []\\)\n        }\\)\n\n# Print results\nprint\\(f\"Found {len\\(relevant_cells\\)} cells related to Part 4/4b:\\\\n\"\\)\nfor cell in relevant_cells:\n    print\\(f\"{'='*80}\"\\)\n    print\\(f\"Cell Index: {cell['index']}, Cell ID: {cell['cell_id']}, Type: {cell['cell_type']}\"\\)\n    print\\(f\"{'='*80}\"\\)\n    print\\(cell['content'][:2000] if len\\(cell['content']\\) > 2000 else cell['content']\\)\n    print\\(\\)\n\nEOF)",
+      "Bash(cd:*)",
+      "Bash(python3:*)"
+    ]
+  }
+}
